@@ -7,6 +7,11 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="enter your email" required>
+            @error('email')
+                <div class="mt-8">
+                    <div class="text-danger">{{ $message }}</div>
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">
