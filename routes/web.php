@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth
+Route::get('/auth/register', [AuthController::class, 'create']);
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::get('/auth/login', [AuthController::class, 'loginPage'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+// Book
 Route::get('/', [BookController::class, 'index']);
 Route::get('/books/create', [BookController::class, 'create']);
 Route::post('/books/store', [BookController::class, 'store']);

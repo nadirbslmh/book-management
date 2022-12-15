@@ -7,6 +7,16 @@
     <title>Book Management</title>
 </head>
 <body>
+    @auth
+        <form action="/auth/logout" method="post">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @else
+        <a href="/auth/register">Register</a>
+        <a href="/auth/login">Login</a>
+    @endauth
+
     <h1>All Books</h1>
 
     @foreach ($books as $book)
