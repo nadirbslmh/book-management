@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book Management</title>
-</head>
-<body>
+<x-layout>
+    <h1>Create a new book</h1>
+
     <form action="/books/store" method="post">
         @csrf
-        <input type="text" name="title" id="title" placeholder="enter book title" required>
-        <input type="text" name="publisher" id="publisher" placeholder="enter book publisher" required>
-        <textarea name="description" id="description" cols="30" rows="10" placeholder="enter book description"></textarea>
-        <button type="submit">Add Book</button>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="enter book title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Publisher</label>
+            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="enter book publisher" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" id="description" rows="3" placeholder="enter book description"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Add Book</button>
     </form>
-</body>
-</html>
+</x-layout>

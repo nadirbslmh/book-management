@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book Management</title>
-</head>
-<body>
-    <h1>Book Details</h1>
-
-    <p>Title: {{ $book->title }}</p>
-    <p>Publisher: {{ $book->publisher }}</p>
-    <p>Description: {{ $book->description }}</p>
-
-    <a href="/books/{{ $book->id }}/edit">Edit book</a>
-
-    <form action="/books/{{ $book->id }}" method="post">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete book</button>
-    </form>
-
-</body>
-</html>
+<x-layout>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <a class="btn btn-secondary" href="/">Go back</a>
+            <h5 class="card-title">{{ $book->title }}</h5>
+            <h6 class="card-title">{{ $book->publisher }}</h6>
+            <p class="card-text">{{ $book->description }}</p>
+            <div class="d-flex">
+                <a class="btn btn-info" href="/books/{{ $book->id }}/edit">Edit</a>
+                <form action="/books/{{ $book->id }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</x-layout>
