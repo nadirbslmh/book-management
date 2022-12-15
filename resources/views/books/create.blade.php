@@ -1,7 +1,7 @@
 <x-layout>
     <h1>Create a new book</h1>
 
-    <form action="/books/store" method="post">
+    <form action="/books/store" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -17,6 +17,16 @@
             <label for="publisher" class="form-label">Publisher</label>
             <input type="text" class="form-control" name="publisher" id="publisher" placeholder="enter book publisher" value="{{ old('publisher') }}" required>
             @error('publisher')
+                <div class="mt-8">
+                    <div class="text-danger">{{ $message }}</div>
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" name="image" id="image">
+            @error('image')
                 <div class="mt-8">
                     <div class="text-danger">{{ $message }}</div>
                 </div>

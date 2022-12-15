@@ -1,7 +1,7 @@
 <x-layout>
     <h1>Edit a book</h1>
 
-    <form action="/books/{{ $book->id }}" method="post">
+    <form action="/books/{{ $book->id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -18,6 +18,16 @@
             <label for="title" class="form-label">Publisher</label>
             <input type="text" class="form-control" name="publisher" id="publisher" value="{{ $book->publisher }}" placeholder="enter book publisher" required>
             @error('publisher')
+                <div class="mt-8">
+                    <div class="text-danger">{{ $message }}</div>
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" name="image" id="image">
+            @error('image')
                 <div class="mt-8">
                     <div class="text-danger">{{ $message }}</div>
                 </div>

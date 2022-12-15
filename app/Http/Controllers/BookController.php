@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rules\File as FileValidator;
 
 class BookController extends Controller
 {
@@ -30,8 +32,14 @@ class BookController extends Controller
         $fields = $request->validate([
             'title' => 'required',
             'publisher' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => FileValidator::types(['jpg', 'png', 'jpeg', 'gif'])
         ]);
+
+        // upload image file
+        if ($request->hasFile('image')) {
+            $fields['image'] = $request->file('image')->store('images', 'public');
+        }
 
         // create a new book data
         Book::create($fields);
@@ -63,8 +71,18 @@ class BookController extends Controller
         $fields = $request->validate([
             'title' => 'required',
             'publisher' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => FileValidator::types(['jpg', 'png', 'jpeg', 'gif'])
         ]);
+
+        // upload image file
+        if ($request->hasFile('image')) {
+            // delete old image
+            File::delete('storage/' . $book->image);
+
+            // upload image
+            $fields['image'] = $request->file('image')->store('images', 'public');
+        }
 
         // update book data
         $book->update($fields);
@@ -76,6 +94,8 @@ class BookController extends Controller
     // delete book data
     public function destroy(Book $book)
     {
+        File::delete('storage/' . $book->image);
+
         $book->delete();
 
         return redirect('/');
